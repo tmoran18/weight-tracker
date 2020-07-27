@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "weight_records",
+  "info": {
+    "name": "weight-record"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "weight": {
+      "type": "decimal"
+    },
+    "date": {
+      "type": "date"
+    }
+  }
+}
