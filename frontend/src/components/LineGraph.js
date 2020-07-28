@@ -3,72 +3,61 @@ import { ResponsiveLine } from "@nivo/line";
 
 const LineGraph = ({ data }) => {
   return (
-    <div style={{ height: "50vh" }}>
+    <div
+      style={{
+        height: "50vh",
+        background: "white",
+        margin: "2rem",
+        boxShadow: "0 8px 18px rgba(0, 0, 0, 0.08)",
+        borderRadius: "10px",
+      }}
+    >
       <ResponsiveLine
         data={data}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
         xScale={{ type: "point" }}
         yScale={{
           type: "linear",
-          min: "auto",
-          max: "auto",
-          stacked: true,
+          min: 75,
+          max: 98,
+          stacked: false,
           reverse: false,
         }}
         axisTop={null}
         axisRight={null}
         axisBottom={{
           orient: "bottom",
-          tickSize: 5,
+          tickSize: 0,
           tickPadding: 5,
           tickRotation: 0,
-          legend: "transportation",
+          legend: "Date - Every Monday",
           legendOffset: 36,
           legendPosition: "middle",
         }}
         axisLeft={{
           orient: "left",
-          tickSize: 5,
+          tickSize: 0,
           tickPadding: 5,
           tickRotation: 0,
-          legend: "count",
+          legend: "Weight - KG",
           legendOffset: -40,
           legendPosition: "middle",
         }}
+        enableGridX={false}
         colors={(d) => d.color}
         pointSize={10}
-        pointColor={{ theme: "background" }}
+        pointColor="#ffffff"
         pointBorderWidth={2}
         pointBorderColor={{ from: "serieColor" }}
         pointLabel="y"
         pointLabelYOffset={-12}
         useMesh={false}
-        legends={[
-          {
-            anchor: "bottom-right",
-            direction: "column",
-            justify: false,
-            translateX: 100,
-            translateY: 0,
-            itemsSpacing: 0,
-            itemDirection: "left-to-right",
-            itemWidth: 80,
-            itemHeight: 20,
-            itemOpacity: 0.75,
-            symbolSize: 12,
-            symbolShape: "circle",
-            symbolBorderColor: "rgba(0, 0, 0, .5)",
-            effects: [
-              {
-                on: "hover",
-                style: {
-                  itemBackground: "rgba(0, 0, 0, .03)",
-                  itemOpacity: 1,
-                },
-              },
-            ],
-          },
-        ]}
+        theme={{
+          fontSize: 16,
+          fontFamily: "Sans-serif",
+          textColor: "#222222",
+        }}
+        legends={[]}
       />
     </div>
   );

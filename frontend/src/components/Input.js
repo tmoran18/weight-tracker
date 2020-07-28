@@ -8,6 +8,7 @@ const Input = ({ onChange, title }) => {
         type="text"
         name="weight"
         onChange={(e) => onChange(e.target.value)}
+        required
       />
     </div>
   );

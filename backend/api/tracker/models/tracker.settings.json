@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "trackers",
+  "info": {
+    "name": "tracker"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "weight": {
+      "type": "decimal"
+    },
+    "pushups": {
+      "type": "integer"
+    }
+  }
+}
