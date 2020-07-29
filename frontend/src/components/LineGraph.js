@@ -1,7 +1,7 @@
 import React from "react";
 import { ResponsiveLine } from "@nivo/line";
 
-const LineGraph = ({ data }) => {
+const LineGraph = ({ graphData }) => {
   return (
     <div
       style={{
@@ -13,7 +13,7 @@ const LineGraph = ({ data }) => {
       }}
     >
       <ResponsiveLine
-        data={data}
+        data={graphData}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
         xScale={{ type: "point" }}
         yScale={{

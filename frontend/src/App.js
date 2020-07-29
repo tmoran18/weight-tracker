@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { addDays, format, compareAsc } from "date-fns";
+import { addDays, addWeeks, format, compareAsc } from "date-fns";
 import Input from "./components/Input";
 import Submit from "./components/Submit";
 import LineGraph from "./components/LineGraph";
@@ -8,47 +8,52 @@ import "./App.css";
 
 function App() {
   const startDate = new Date("2020/07/20");
-
+  const dateFormat = "dd/MM/yyyy";
   const [weight, setWeight] = useState(null);
   const [pushups, setPushUps] = useState(null);
-  const [startWeight, setStartWeight] = useState(null);
-  const [date, setDate] = useState(null);
-  const [data, setData] = useState([
-    {
-      id: "japan",
-      color: "#00B2FF",
-      data: [
-        {
-          x: "20th July 2020",
-          y: 95.4,
-        },
-        {
-          x: "27th July 2020",
-          y: 95.6,
-        },
-        {
-          x: "3rd August 2020",
-          y: 94.5,
-        },
-        {
-          x: "10th August 2020",
-          y: 94,
-        },
-      ],
-    },
-  ]);
+  const [data, setData] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  // Onload get
   useEffect(() => {
     axios
       .get("http://localhost:1337/trackers")
       .then(function (response) {
-        console.log(response.data[0]);
+        setLoading(true);
+        buildGraphData(response.data);
       })
       .catch(function (error) {
         console.log(error);
       });
   }, []);
 
-  const addWeeksToStartDate = () => {};
+  // Build an object to pass to the Line Graph
+  const buildGraphData = (resData) => {
+    const graphData = [
+      {
+        id: "weight tracker",
+        color: "blue",
+        data: [],
+      },
+    ];
+    resData.forEach((element, index) => {
+      // First element, give start date and first weight
+      element.id === 1
+        ? graphData[0].data.push({
+            x: format(startDate, dateFormat),
+            y: element.weight,
+          })
+        : // Else give a date + No. of weeks and format date and weight
+          graphData[0].data.push({
+            x: format(addWeeks(startDate, index), dateFormat),
+            y: element.weight,
+          });
+    });
+
+    setData(graphData);
+    setLoading(false);
+  };
+
   const postToStrapi = () => {
     axios({
       method: "post",
@@ -90,7 +95,7 @@ function App() {
         onChange={(value) => setPushUps(value)}
       />
       <Submit handleSubmit={handleSubmit} />
-      <LineGraph data={data} />
+      <div>{loading ? "loading" : <LineGraph graphData={data} />}</div>
     </div>
   );
 }
