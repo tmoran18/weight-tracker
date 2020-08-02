@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import firebase, { auth, provider } from "./firebase.js";
-import { addDays, addWeeks, format, compareAsc } from "date-fns";
+import { addWeeks, format } from "date-fns";
 import Navbar from "./components/Navbar";
+import Spinner from "./components/Spinner";
 import Input from "./components/Input";
 import Submit from "./components/Submit";
 import LineGraph from "./components/LineGraph";
-import axios from "axios";
+import Stats from "./components/Stats";
 import "./App.css";
 
 function App() {
@@ -17,23 +18,26 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(null);
   const [weekIndex, setWeekIndex] = useState(null);
+  const [weeklyLoss, setWeeklyLoss] = useState(null);
 
-  // Onload get
+  // Onload get data from firebase database
   useEffect(() => {
+    setLoading(true);
     auth.onAuthStateChanged((user) => user && setUser(user));
     const weeksRef = firebase.database().ref("weeks");
     weeksRef.on("value", (snapshop) => {
       let weeks = snapshop.val();
-      let dbData = [];
       // Get the length of data in DB
       const weeksLength = Object.keys(weeks);
       setWeekIndex(weeksLength.length);
       buildGraphData(weeks);
+      setWeeklyLoss(weeklyLosses(weeks));
     });
   }, []);
 
   // Build an object to pass to the Line Graph
   const buildGraphData = (weeks) => {
+    // Create a graphData Object with empty data array for filling
     const graphData = [
       {
         id: "weight tracker",
@@ -41,16 +45,15 @@ function App() {
         data: [],
       },
     ];
-    const arrToSort = [];
-    // Loop over the data objects
-    Object.entries(weeks).forEach((entry) => {
-      arrToSort.push(entry[1]);
-    });
 
-    const sortedArr = sortArr(arrToSort);
-    sortedArr.forEach((element, index) => {
+    // Sort the data by index
+    const arr = sortData(weeks);
+
+    // iterate of data to build line graph data object
+    // manually set the start date for the first index
+    // add 1 week onto date for all other indexes
+    arr.forEach((element, index) => {
       // First element, give start date and first weight
-      console.log(element);
       index === 0
         ? graphData[0].data.push({
             x: format(startDate, dateFormat),
@@ -66,7 +69,31 @@ function App() {
     setLoading(false);
   };
 
-  const sortArr = (arr) => arr.sort((a, b) => a.id - b.id);
+  // Get the data for the weekly loss
+  const weeklyLosses = (data) => {
+    const weeklyLossData = sortData(data);
+    return round(
+      weeklyLossData[weeklyLossData.length - 2].weight -
+        weeklyLossData[weeklyLossData.length - 1].weight,
+      10
+    );
+  };
+
+  // Rounding function that handles negative numbers
+  const round = (value, precision) => {
+    const multiplier = Math.pow(10, precision || 0);
+    return Math.round(value * multiplier) / multiplier;
+  };
+
+  // Sort data by index ASC
+  const sortData = (data) => {
+    const dataToSort = [];
+    Object.entries(data).forEach((entry) => {
+      dataToSort.push(entry[1]);
+    });
+    // Return the array by sorting numerically by ID
+    return dataToSort.sort((a, b) => a.id - b.id);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -92,7 +119,9 @@ function App() {
     weeksRef.push(week);
   };
 
-  return (
+  return loading ? (
+    <Spinner />
+  ) : (
     <div className="App">
       <Navbar />
       <div className="container">
@@ -110,6 +139,7 @@ function App() {
       </div>
       <Submit handleSubmit={handleSubmit} />
       <div>{loading ? "loading" : <LineGraph graphData={data} />}</div>
+      <Stats weeklyLoss={weeklyLoss} loading={loading} />
     </div>
   );
 }

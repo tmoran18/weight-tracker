@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "../App.css";
 
 const Input = ({ onChange, title, value, placeholder }) => {
@@ -10,7 +10,7 @@ const Input = ({ onChange, title, value, placeholder }) => {
       <input
         type="text"
         name="weight"
-        value={value}
+        value={value === null ? "" : value}
         onChange={(e) => onChange(e.target.value)}
         className="input"
         required

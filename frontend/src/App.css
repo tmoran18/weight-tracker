@@ -85,3 +85,36 @@ button:hover {
   background: white;
   border: 1px solid #00b2ff;
 }
+
+.red {
+  color: red;
+}
+
+.green {
+  font-weight: 600;
+  color: rgb(0, 197, 0);
+}
+
+.stats {
+  font-size: 30px;
+  font-weight: 600;
+  color: #00b2ff;
+  display: flex;
+  justify-content: space-around;
+}
+
+.spinner_container {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20vh;
+}
+
+@media only screen and (max-width: 600px) {
+  .container {
+    display: flex;
+    align-items: center;
+  }
+}
