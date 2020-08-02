@@ -2,7 +2,7 @@ import React from "react";
 
 const Submit = ({ handleSubmit }) => {
   return (
-    <div>
+    <div className="submit_btn_container">
       <button onClick={handleSubmit}>Submit</button>
     </div>
   );

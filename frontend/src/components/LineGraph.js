@@ -30,7 +30,7 @@ const LineGraph = ({ graphData }) => {
           tickSize: 0,
           tickPadding: 5,
           tickRotation: 0,
-          legend: "Date - Every Monday",
+          legend: "Date",
           legendOffset: 36,
           legendPosition: "middle",
         }}
@@ -45,7 +45,7 @@ const LineGraph = ({ graphData }) => {
         }}
         enableGridX={false}
         colors={(d) => d.color}
-        pointSize={10}
+        pointSize={7}
         pointColor="#ffffff"
         pointBorderWidth={2}
         pointBorderColor={{ from: "serieColor" }}

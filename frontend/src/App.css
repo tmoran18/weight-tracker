@@ -1,3 +1,87 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
+
 body {
   background: #f5f7fa;
+  font-family: "Montserrat", sans-serif;
+}
+
+.blue {
+  color: #00b2ff;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.input_container {
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.input {
+  border: none;
+  background: none;
+  border-bottom: 1px solid #00b2ff;
+  max-width: 300px;
+  padding: 10px;
+  outline: none;
+}
+
+.input:focus {
+  border-bottom: 3px dashed #00b2ff;
+}
+
+.container {
+  display: flex;
+  max-width: 800px;
+  margin: auto;
+  justify-content: space-between;
+}
+
+.input_placeholder {
+  position: absolute;
+  right: 0;
+  top: 35px;
+  color: #00b2ff;
+}
+
+.navbar {
+  background: #00b2ff;
+  padding: 5px;
+  color: white;
+  font-weight: 600;
+  font-size: 20px;
+  margin-bottom: 25px;
+  display: flex;
+  align-items: center;
+}
+
+.navbar svg {
+  fill: white;
+  width: 45px;
+  height: 45px;
+  margin-right: 10px;
+}
+
+.submit_btn_container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.submit_btn_container button {
+  border: none;
+  background: #00b2ff;
+  border: 1px solid #00b2ff;
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 10px 51px;
+  border-radius: 2px;
+}
+button:hover {
+  color: #00b2ff;
+  background: white;
+  border: 1px solid #00b2ff;
 }
