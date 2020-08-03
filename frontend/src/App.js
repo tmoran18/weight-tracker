@@ -19,13 +19,11 @@ function App() {
   const [user, setUser] = useState(null);
   const [weekIndex, setWeekIndex] = useState(null);
   const [weeklyLoss, setWeeklyLoss] = useState(null);
-  const graphData1 = { 
+  const graphData1 = {
     id: "weight tracker",
     color: "#00b2ff",
     data: [],
-  }
-
-  }
+  };
 
   // Onload get data from firebase database
   useEffect(() => {
@@ -145,7 +143,10 @@ function App() {
         />
       </div>
       <Submit handleSubmit={handleSubmit} />
-      <div>{loading ? "loading" : <LineGraph graphData={data} />}</div>
+      <div>
+        {loading ? "loading" : <LineGraph graphData={data} />}
+        <LineGraph className="second" graphData={data} />
+      </div>
       <Stats weeklyLoss={weeklyLoss} loading={loading} />
     </div>
   );
