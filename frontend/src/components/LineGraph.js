@@ -24,7 +24,15 @@ const LineGraph = ({ graphData }) => {
           reverse: false,
         }}
         axisTop={null}
-        axisRight={null}
+        axisRight={{
+          orient: "right",
+          tickSize: 0,
+          tickPadding: 5,
+          tickRotation: 0,
+          legend: "Pushups",
+          legendOffset: 40,
+          legendPosition: "middle",
+        }}
         axisBottom={{
           orient: "bottom",
           tickSize: 0,

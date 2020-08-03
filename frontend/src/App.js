@@ -19,6 +19,13 @@ function App() {
   const [user, setUser] = useState(null);
   const [weekIndex, setWeekIndex] = useState(null);
   const [weeklyLoss, setWeeklyLoss] = useState(null);
+  const graphData1 = { 
+    id: "weight tracker",
+    color: "#00b2ff",
+    data: [],
+  }
+
+  }
 
   // Onload get data from firebase database
   useEffect(() => {
