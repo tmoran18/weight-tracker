@@ -1,47 +1,42 @@
 import React from "react";
 import { ResponsiveLine } from "@nivo/line";
 
-const LineGraph = ({ graphData }) => {
+const LineGraphRight = ({ graphData }) => {
   return (
     <div
+      className="pushups_graph"
       style={{
         height: "50vh",
         background: "",
         margin: "2rem",
-        border: "1px solid blue",
+        boxShadow: "0 8px 18px rgba(0, 0, 0, 0.08)",
+        borderRadius: "10px",
       }}
     >
       <ResponsiveLine
         data={graphData}
         margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
         xScale={{ type: "point" }}
+        enableGridY={false}
         yScale={{
           type: "linear",
-          min: 75,
-          max: 98,
+          min: 0,
+          max: 110,
           stacked: false,
           reverse: false,
         }}
         axisTop={null}
-        axisRight={null}
-        axisBottom={{
-          orient: "bottom",
+        axisRight={{
+          orient: "right",
           tickSize: 0,
           tickPadding: 5,
           tickRotation: 0,
-          legend: "Date",
-          legendOffset: 36,
+          legend: "Pushups",
+          legendOffset: 40,
           legendPosition: "middle",
         }}
-        axisLeft={{
-          orient: "left",
-          tickSize: 0,
-          tickPadding: 5,
-          tickRotation: 0,
-          legend: "Weight - KG",
-          legendOffset: -40,
-          legendPosition: "middle",
-        }}
+        axisBottom={null}
+        axisLeft={null}
         enableGridX={false}
         colors={(d) => d.color}
         pointSize={7}
@@ -62,4 +57,4 @@ const LineGraph = ({ graphData }) => {
   );
 };
 
-export default LineGraph;
+export default LineGraphRight;

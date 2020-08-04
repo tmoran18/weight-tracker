@@ -6,6 +6,7 @@ import Spinner from "./components/Spinner";
 import Input from "./components/Input";
 import Submit from "./components/Submit";
 import LineGraph from "./components/LineGraph";
+import LineGraphRight from "./components/LineGraphRight";
 import Stats from "./components/Stats";
 import "./App.css";
 
@@ -143,9 +144,9 @@ function App() {
         />
       </div>
       <Submit handleSubmit={handleSubmit} />
-      <div>
+      <div className="graph_container">
         {loading ? "loading" : <LineGraph graphData={data} />}
-        <LineGraph className="second" graphData={data} />
+        <LineGraphRight className="second" graphData={data} />
       </div>
       <Stats weeklyLoss={weeklyLoss} loading={loading} />
     </div>
