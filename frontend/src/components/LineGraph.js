@@ -5,10 +5,9 @@ const LineGraph = ({ graphData }) => {
   return (
     <div
       style={{
-        height: "50vh",
+        height: "500px",
         background: "",
         margin: "2rem",
-        border: "1px solid blue",
       }}
     >
       <ResponsiveLine
@@ -54,7 +53,7 @@ const LineGraph = ({ graphData }) => {
         theme={{
           fontSize: 16,
           fontFamily: "Sans-serif",
-          textColor: "#222222",
+          textColor: "#00b2ff",
         }}
         legends={[]}
       />

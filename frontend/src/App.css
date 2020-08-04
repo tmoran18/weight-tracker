@@ -80,12 +80,32 @@ body {
   padding: 10px 51px;
   border-radius: 2px;
 }
-button:hover {
+
+.login_btn {
+  border: none;
+  background: white;
+  border: 1px solid white;
+  color: #00b2ff;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 10px 51px;
+  border-radius: 2px;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.submit_btn_container button:hover {
   color: #00b2ff;
   background: white;
   border: 1px solid #00b2ff;
 }
 
+.login_btn:hover {
+  color: white;
+  background: #00b2ff;
+}
 .red {
   color: red;
 }
@@ -121,12 +141,30 @@ button:hover {
 
 .pushups_graph {
   position: absolute;
-  bottom: -20px;
+  bottom: 0px;
+  top: -35px;
   left: 0px;
   right: 0px;
-  border: 1px solid red;
 }
 
 .graph_container {
   position: relative;
+}
+
+.login_msg {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 600;
+  color: #00b2ff;
+  margin-top: 10vh;
+}
+
+.username {
+  text-align: left;
+  font-size: 16px;
+  position: absolute;
+  top: 200px;
+  left: 35px;
+  color: red;
+  font-weight: bold;
 }

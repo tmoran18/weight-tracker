@@ -16,15 +16,12 @@ function App() {
   const [weight, setWeight] = useState(null);
   const [pushups, setPushUps] = useState(null);
   const [data, setData] = useState([]);
+  const [pushupData, setPushupData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [user, setUser] = useState(null);
+  const [userName, setUsername] = useState("");
   const [weekIndex, setWeekIndex] = useState(null);
   const [weeklyLoss, setWeeklyLoss] = useState(null);
-  const graphData1 = {
-    id: "weight tracker",
-    color: "#00b2ff",
-    data: [],
-  };
 
   // Onload get data from firebase database
   useEffect(() => {
@@ -41,6 +38,19 @@ function App() {
     });
   }, []);
 
+  const login = () => {
+    auth.signInWithPopup(provider).then((result) => {
+      const user = result.user;
+      setUser(user);
+    });
+  };
+
+  const logout = () => {
+    auth.signOut().then(() => {
+      setUser(null);
+    });
+  };
+
   // Build an object to pass to the Line Graph
   const buildGraphData = (weeks) => {
     // Create a graphData Object with empty data array for filling
@@ -48,6 +58,14 @@ function App() {
       {
         id: "weight tracker",
         color: "#00b2ff",
+        data: [],
+      },
+    ];
+
+    const pushupGraphData = [
+      {
+        id: "weight tracker",
+        color: "#ff0000",
         data: [],
       },
     ];
@@ -64,14 +82,23 @@ function App() {
         ? graphData[0].data.push({
             x: format(startDate, dateFormat),
             y: element.weight,
+          }) &&
+          pushupGraphData[0].data.push({
+            x: format(startDate, dateFormat),
+            y: element.pushups,
           })
         : // Else give a date + No. of weeks and format date and weight
           graphData[0].data.push({
             x: format(addWeeks(startDate, index), dateFormat),
             y: element.weight,
+          }) &&
+          pushupGraphData[0].data.push({
+            x: format(addWeeks(startDate, index), dateFormat),
+            y: element.pushups,
           });
     });
     setData(graphData);
+    setPushupData(pushupGraphData);
     setLoading(false);
   };
 
@@ -125,30 +152,43 @@ function App() {
     weeksRef.push(week);
   };
 
-  return loading ? (
-    <Spinner />
-  ) : (
+  return (
     <div className="App">
-      <Navbar />
-      <div className="container">
-        <Input
-          title={"Your weight this week"}
-          onChange={(value) => setWeight(value)}
-          value={weight}
-          placeholder={"KG"}
-        />
-        <Input
-          title={"How many Push Ups this week"}
-          onChange={(value) => setPushUps(value)}
-          value={pushups}
-        />
-      </div>
-      <Submit handleSubmit={handleSubmit} />
-      <div className="graph_container">
-        {loading ? "loading" : <LineGraph graphData={data} />}
-        <LineGraphRight className="second" graphData={data} />
-      </div>
-      <Stats weeklyLoss={weeklyLoss} loading={loading} />
+      <header>
+        <Navbar user={user} login={login} logout={logout} />
+      </header>
+      {user ? (
+        <section>
+          <span className="username">Welcome {user.displayName}</span>
+          <div className="container">
+            <Input
+              title={"Your weight this week"}
+              onChange={(value) => setWeight(value)}
+              value={weight}
+              placeholder={"KG"}
+            />
+            <Input
+              title={"How many Push Ups this week"}
+              onChange={(value) => setPushUps(value)}
+              value={pushups}
+            />
+          </div>
+          <Submit handleSubmit={handleSubmit} />
+          {loading ? (
+            <Spinner />
+          ) : (
+            <div className="graph_container">
+              <LineGraph graphData={data} />
+              <LineGraphRight className="second" graphData={pushupData} />
+              <Stats weeklyLoss={weeklyLoss} loading={loading} />
+            </div>
+          )}
+        </section>
+      ) : (
+        <section className="login_msg">
+          Please login with google to view this app
+        </section>
+      )}
     </div>
   );
 }

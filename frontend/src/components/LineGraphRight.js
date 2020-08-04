@@ -6,11 +6,13 @@ const LineGraphRight = ({ graphData }) => {
     <div
       className="pushups_graph"
       style={{
-        height: "50vh",
+        height: "500px",
         background: "",
+        maxHeight: "490px",
         margin: "2rem",
         boxShadow: "0 8px 18px rgba(0, 0, 0, 0.08)",
         borderRadius: "10px",
+        paddingBottom: "100px",
       }}
     >
       <ResponsiveLine
@@ -49,7 +51,7 @@ const LineGraphRight = ({ graphData }) => {
         theme={{
           fontSize: 16,
           fontFamily: "Sans-serif",
-          textColor: "#222222",
+          textColor: "red",
         }}
         legends={[]}
       />
