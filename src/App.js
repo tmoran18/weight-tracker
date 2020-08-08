@@ -22,6 +22,8 @@ function App() {
   const [weekIndex, setWeekIndex] = useState(null);
   const [weeklyLoss, setWeeklyLoss] = useState(null);
 
+  let key = process.env.API_KEY;
+  console.log(key);
   // Onload get data from firebase database
   useEffect(() => {
     setLoading(true);
@@ -34,8 +36,6 @@ function App() {
       setWeekIndex(weeksLength.length);
       buildGraphData(weeks);
       setWeeklyLoss(weeklyLosses(weeks));
-      let key = process.env.API_KEY;
-      console.log(key);
     });
   }, []);
 
