@@ -34,6 +34,8 @@ function App() {
       setWeekIndex(weeksLength.length);
       buildGraphData(weeks);
       setWeeklyLoss(weeklyLosses(weeks));
+      let key = process.env.API_KEY;
+      console.log(key);
     });
   }, []);
 
