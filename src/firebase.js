@@ -12,6 +12,7 @@ const createConfig = () => {
       messagingSenderId: process.env.REACT_APP_WEIGHT_TRACKER_SENDER_ID,
       appId: process.env.REACT_APP_WEIGHT_TRACKER_APP_ID,
     };
+    console.log("not production");
     return config;
   } else {
     const config = {
@@ -23,6 +24,7 @@ const createConfig = () => {
       messagingSenderId: process.env.TRACKER_SENDER_ID,
       appId: process.env.APP_ID,
     };
+    console.log("production!!!");
     return config;
   }
 };
