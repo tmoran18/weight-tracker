@@ -1,5 +1,4 @@
 import * as firebase from "firebase";
-import React from "react";
 
 const createConfig = () => {
   if (process.env.NODE_ENV !== "production") {
@@ -28,9 +27,6 @@ const createConfig = () => {
     return config;
   }
 };
-
-let apiKey = process.env.API_KEY;
-console.log(apiKey);
 
 // Initialize Firebase
 const config = createConfig();

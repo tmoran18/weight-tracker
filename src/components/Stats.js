@@ -1,9 +1,6 @@
 import React from "react";
 
 const Stats = ({ weeklyLoss }) => {
-  const weeklyLossNegOrPos = (weeklyLoss) => {
-    return Math.sign(weeklyLoss) ? "Postivie" : "negative";
-  };
   return (
     <div className="stats">
       <div>
