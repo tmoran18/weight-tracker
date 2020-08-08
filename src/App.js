@@ -156,6 +156,7 @@ function App() {
   return (
     <div className="App">
       <header>
+        {console.log(process.env.API_KEY)}
         <Navbar user={user} login={login} logout={logout} />
       </header>
       {user ? (
