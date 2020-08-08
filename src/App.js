@@ -21,17 +21,17 @@ function App() {
   const [user, setUser] = useState(null);
   const [weekIndex, setWeekIndex] = useState(null);
   const [weeklyLoss, setWeeklyLoss] = useState(null);
+  const [envs, setEnvs] = useState(process.env.API_KEY);
 
-  let key = process.env.API_KEY;
-  console.log(key);
   // Onload get data from firebase database
   useEffect(() => {
-    setLoading(true);
     auth.onAuthStateChanged((user) => user && setUser(user));
+    user && setLoading(true);
     const weeksRef = firebase.database().ref("weeks");
     weeksRef.on("value", (snapshop) => {
       let weeks = snapshop.val();
       // Get the length of data in DB
+      setLoading(false);
       const weeksLength = Object.keys(weeks);
       setWeekIndex(weeksLength.length);
       buildGraphData(weeks);
@@ -156,7 +156,6 @@ function App() {
   return (
     <div className="App">
       <header>
-        {console.log(process.env.API_KEY)}
         <Navbar user={user} login={login} logout={logout} />
       </header>
       {user ? (
