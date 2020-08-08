@@ -24,10 +24,13 @@ const createConfig = () => {
       messagingSenderId: process.env.TRACKER_SENDER_ID,
       appId: process.env.APP_ID,
     };
-    console.log("production!!!");
+    console.log(config);
     return config;
   }
 };
+
+let apiKey = process.env.API_KEY;
+console.log(apiKey);
 
 // Initialize Firebase
 const config = createConfig();
