@@ -1,5 +1,13 @@
 import * as firebase from "firebase";
 
+let key = process.env.API_KEY;
+let domain = process.env.AUTH_DOMAIN;
+let db = process.env.DB_URL;
+let project = process.env.PROJECT_ID;
+let bucket = process.env.STORAGE_BUCKET;
+let sender = process.env.TRACKER_SENDER_ID;
+let app = process.env.APP_ID;
+
 const createConfig = () => {
   if (process.env.NODE_ENV !== "production") {
     const config = {
@@ -15,13 +23,13 @@ const createConfig = () => {
     return config;
   } else {
     const config = {
-      apiKey: process.env.API_KEY,
-      authDomain: process.env.AUTH_DOMAIN,
-      databaseURL: process.env.DB_URL,
-      projectId: process.env.PROJECT_ID,
-      storageBucket: process.env.STORAGE_BUCKET,
-      messagingSenderId: process.env.TRACKER_SENDER_ID,
-      appId: process.env.APP_ID,
+      apiKey: key,
+      authDomain: domain,
+      databaseURL: db,
+      projectId: project,
+      storageBucket: bucket,
+      messagingSenderId: sender,
+      appId: app,
     };
     console.log(config);
     return config;
