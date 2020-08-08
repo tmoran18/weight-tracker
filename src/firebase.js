@@ -23,13 +23,13 @@ const createConfig = () => {
     return config;
   } else {
     const config = {
-      apiKey: key,
-      authDomain: domain,
-      databaseURL: db,
-      projectId: project,
-      storageBucket: bucket,
-      messagingSenderId: sender,
-      appId: app,
+      apiKey: "AIzaSyCbCNN5EO6Ab6P1hb7FDNACBrM6JEXdcgI",
+      authDomain: "weight-tracker-f9cb0.firebaseapp.com",
+      databaseURL: "https://weight-tracker-f9cb0.firebaseio.com",
+      projectId: "weight-tracker-f9cb0",
+      storageBucket: "weight-tracker-f9cb0.appspot.com",
+      messagingSenderId: "943744244319",
+      appId: "1:943744244319:web:2eceaccc977f7b8ed2d9ea",
     };
     console.log(config);
     return config;
