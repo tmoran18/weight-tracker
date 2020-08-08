@@ -15,7 +15,7 @@ const createConfig = () => {
     return config;
   } else {
     const config = {
-      apiKey: process.env.REACT_APP_API_KEY,
+      apiKey: process.env.API_KEY,
       authDomain: process.env.AUTH_DOMAIN,
       databaseURL: process.env.DB_URL,
       projectId: process.env.PROJECT_ID,

@@ -1,4 +1,2 @@
 [build]
-base = "weight-tracker/"
-publish = "weight-tracker/build/"
-command = "npm run build"
+  publish="build"
