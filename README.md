@@ -8,3 +8,15 @@
 
 ![Screenshot](weight_tracker.png)
 
+### Installation
+
+```bash
+git clone https://github.com/tmoran18/weight-tracker.git
+cd weight-tracker
+npm i
+```
+
+### Firebase Database
+- You will need to create your own firebase account and create a real time database 
+[Firebase Realtime Database Guide](https://firebase.google.com/docs/database/web/start)
+- Once you have created your database you will get config details. Enter these into the config in the firebase.js file
