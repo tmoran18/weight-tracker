@@ -25,18 +25,16 @@ function App() {
   // Onload get data from firebase database
   useEffect(() => {
     auth.onAuthStateChanged((user) => user && setUser(user));
-    if (user) {
-      const weeksRef = firebase.database().ref("weeks");
-      weeksRef.on("value", (snapshop) => {
-        let weeks = snapshop.val();
-        // Get the length of data in DB
-        setLoading(false);
-        const weeksLength = Object.keys(weeks);
-        setWeekIndex(weeksLength.length);
-        buildGraphData(weeks);
-        setWeeklyLoss(weeklyLosses(weeks));
-      });
-    }
+    const weeksRef = firebase.database().ref("weeks");
+    weeksRef.on("value", (snapshop) => {
+      let weeks = snapshop.val();
+      // Get the length of data in DB
+      setLoading(false);
+      const weeksLength = Object.keys(weeks);
+      setWeekIndex(weeksLength.length);
+      buildGraphData(weeks);
+      setWeeklyLoss(weeklyLosses(weeks));
+    });
   }, []);
 
   const login = () => {
